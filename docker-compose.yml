@@ -19,7 +19,8 @@ services:
       - "4000:4000"
 
   bigstoredb:
-    image: mysql:5.7
+    image: mysql:8.0
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -32,6 +33,7 @@ services:
 
   adminer:
     image: adminer:4.8.1
+    platform: linux/amd64
     restart: always
     ports:
       - "8080:8080"
