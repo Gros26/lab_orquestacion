@@ -1,7 +1,25 @@
+version: "3"
+
 services:
-  
+  mystore_ms:
+    build:
+      context: ./bigstore_ms
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - bigstoredb
+    environment:
+      DB_HOST: ${MYSQL_HOST}
+      DB_PORT: ${MYSQL_PORT}
+      DB_USER: ${MYSQL_USER}
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+      URL: ${URL}
+    ports:
+      - "4000:4000"
+
   bigstoredb:
-    image: mysql:5.7
+    image: mysql:8.0
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -19,7 +37,6 @@ services:
     restart: always
     ports:
       - "8080:8080"
-
 
 volumes:
   mysql-data:
