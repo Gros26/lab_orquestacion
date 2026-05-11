@@ -1,6 +1,15 @@
 version: "3"
 
 services:
+  mystore_frontend:
+    build:
+      context: ./mystore_frontend
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+       - mystore_ms
+    ports:
+      - "8085:80"
   mystore_ms:
     build:
       context: ./bigstore_ms
